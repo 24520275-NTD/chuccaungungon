@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#fff5f7">
-    <meta name="description" content="Một câu hỏi nhỏ và lời chúc ngủ ngon dành riêng cho em.">
+    <meta name="description" content="Một câu hỏi nhỏ và lời chúc ngủ ngon dành riêng cho bé.">
     <title>Một lá thư tình</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -625,7 +625,7 @@
         import React, { useState, useRef, useEffect } from 'https://esm.sh/react@19.1.0';
         import { createRoot } from 'https://esm.sh/react-dom@19.1.0/client?deps=react@19.1.0';
         const h = React.createElement;
-        const messages = ['Em có yêu anh không?', 'Chắc chưa? Nghĩ lại đi mà 🥺', 'Anh buồn lắm đó nha...', 'Thử lại lần nữa đi, anh đợi mà', 'Nút Không sắp biến mất rồi nè 😢', 'Thôi mà, bấm Có đi em ơi 💕'];
+        const messages = ['Em cóa yêu anh hong?', 'Chắc chưa? Nghĩ lại đi mà 🥺', 'Anh bùn lắm đó nha...', 'Thử lại lần nữa ii, anh đợi mà', 'Nút hăm sắp biến mất rùi nè 😢', 'Thui mò,đừng tự dối lòng bé ơi 💕'];
         const moods = ['🥰', '🥺', '😢', '😭', '🥹'];
         function emojiText(text) { return text.split(/([🥰🥺😢😭🥹💕💖🌙])/u).map((part, i) => /^[🥰🥺😢😭🥹💕💖🌙]$/u.test(part) ? h('img', { className: 'emoji', key: i, alt: part, src: 'https://cdn.jsdelivr.net/gh/jdecked/twemoji@17.0.2/assets/svg/' + part.codePointAt(0).toString(16) + '.svg' }) : part); }
         const shifts = [[0, 0], [6, -7], [-4, 8], [7, -12], [-3, 13]];
