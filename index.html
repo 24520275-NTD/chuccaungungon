@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#fff5f7">
+    <meta name="description" content="Một câu hỏi nhỏ và lời chúc ngủ ngon dành riêng cho em.">
+    <title>Một lá thư tình</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            font-family: Nunito, system-ui, sans-serif;
+            color: #4c2734;
+            background: #fff5f7;
+            --pink: #f43f73;
+            --rose: #a73756;
+            --muted: #805362;
+            --line: #f4dbe1
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body,
+        #root {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden
+        }
+
+        button {
+            font: inherit;
+            cursor: pointer;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent
+        }
+
+        button:focus-visible {
+            outline: 3px solid #952445;
+            outline-offset: 4px
+        }
+
+        svg {
+            display: block
+        }
+
+        .scene {
+            height: 100dvh;
+            display: grid;
+            place-items: center;
+            isolation: isolate;
+            position: relative;
+            overflow: hidden;
+            padding: 12px 14px;
+            background: radial-gradient(ellipse at 50% 42%, #fff9f1 0%, #fff5f7 62%, #ffeaf0 100%)
+        }
+
+        .wrap {
+            width: min(100%, 592px);
+            height: min(100%, 697px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 14px;
+            z-index: 1
+        }
+
+        .brand,
+        .signoff {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            color: var(--rose);
+            font-size: 11px;
+            letter-spacing: .19em;
+            font-weight: 900;
+            text-transform: uppercase;
+            white-space: nowrap
+        }
+
+        .brand svg {
+            width: 19px;
+            height: 19px
+        }
+
+        .signoff {
+            text-transform: none;
+            letter-spacing: .04em;
+            font-size: 12px;
+            font-weight: 800;
+            color: var(--muted)
+        }
+
+        .signoff svg {
+            width: 13px;
+            height: 13px;
+            color: #b84965
+        }
+
+        .card {
+            position: relative;
+            flex: 0 1 610px;
+            min-height: 0;
+            isolation: isolate;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            justify-content: center;
+            padding: clamp(14px, 4vh, 37px) clamp(14px, 6vw, 54px) clamp(12px, 3vh, 27px);
+            border: 1px solid #f3dbe1;
+            border-radius: 32px;
+            background: #fffdfb;
+            box-shadow: 0 19px 52px #aa385514, 0 4px 10px #aa385509;
+            text-align: center
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            inset: 8px;
+            border: 1px dashed #f4dce2;
+            border-radius: 25px;
+            pointer-events: none;
+            z-index: -1
+        }
+
+        .stamp {
+            position: absolute;
+            top: 21px;
+            right: 22px;
+            width: 43px;
+            height: 47px;
+            color: #c55b75;
+            display: grid;
+            place-items: center;
+            background: #fff0f3;
+            outline: 1px dashed #efb7c5;
+            outline-offset: 2px;
+            border-radius: 5px;
+            rotate: 10deg
+        }
+
+        .stamp svg {
+            width: 20px;
+            height: 20px
+        }
+
+        .intro {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 0
+        }
+
+        .portrait {
+            width: clamp(94px, 28dvh, 225px);
+            aspect-ratio: 1;
+            position: relative;
+            flex: none;
+            border-radius: 27px;
+            background: #ffebef;
+            border: 1px solid #f5d8df;
+            display: grid;
+            place-items: center;
+            transition: width .35s ease;
+            margin-bottom: clamp(10px, 3.1dvh, 25px)
+        }
+
+        .portrait img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: inherit
+        }
+
+        .mood {
+            display: grid;
+            place-items: center;
+            position: absolute;
+            right: -8px;
+            bottom: -6px;
+            width: clamp(32px, 5.7dvh, 45px);
+            height: clamp(32px, 5.7dvh, 45px);
+            font-size: clamp(17px, 3.4dvh, 25px);
+            border: 1px solid #f4dce2;
+            border-radius: 50%;
+            background: #fffdfb;
+            box-shadow: 0 3px 9px #a53a5415
+        }
+
+        .eyebrow {
+            margin: 0 0 7px;
+            color: var(--rose);
+            font-size: 10px;
+            letter-spacing: .19em;
+            text-transform: uppercase;
+            font-weight: 900
+        }
+
+        h1 {
+            margin: 0;
+            line-height: 1.12;
+            font-size: clamp(25px, 6.9vw, 45px);
+            letter-spacing: -.045em;
+            font-weight: 900;
+            text-wrap: balance
+        }
+
+        h1:focus {
+            outline: none
+        }
+
+        .question-copy {
+            margin: 9px 0 0;
+            color: var(--muted);
+            font-size: clamp(12px, 3.5vw, 15px);
+            font-weight: 700;
+            line-height: 1.4
+        }
+
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: clamp(8px, 2.7vw, 17px);
+            align-items: center;
+            min-height: clamp(78px, 17dvh, 126px);
+            position: relative
+        }
+
+        .yes,
+        .no,
+        .replay {
+            border: 0;
+            border-radius: 999px;
+            font-weight: 900
+        }
+
+        .yes {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            color: white;
+            background: var(--pink);
+            text-shadow: 0 1px 2px #801530aa;
+            box-shadow: 0 5px 0 #cf2b56, 0 10px 17px #ea407236;
+            min-width: 0;
+            flex-shrink: 1;
+            width: calc(clamp(100px, 30vw, 145px) * var(--grow));
+            height: calc(clamp(45px, 6.5dvh, 53px) * var(--grow));
+            font-size: calc(17px + (var(--grow) - 1) * 7px);
+            transition: width .28s, height .28s, font-size .28s, background .18s, box-shadow .18s
+        }
+
+        .yes svg {
+            width: 1em;
+            height: 1em
+        }
+
+        .yes:hover {
+            background: #d92c60
+        }
+
+        .yes:active {
+            box-shadow: 0 2px 0 #cf2b56
+        }
+
+        .no {
+            position: relative;
+            flex: none;
+            display: grid;
+            place-items: center;
+            min-width: 64px;
+            min-height: 44px;
+            padding: 0 12px;
+            color: #53414a;
+            background: transparent;
+            translate: var(--shift-x) var(--shift-y);
+            transition: translate .28s;
+            font-size: calc(10px + var(--shrink) * 6px);
+            isolation: isolate
+        }
+
+        .no::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            background: #f4f0f2;
+            border: 1px solid #ece2e7;
+            border-radius: inherit;
+            scale: var(--shrink);
+            transition: scale .28s, background .18s
+        }
+
+        .no:hover::before {
+            background: #ece4e8
+        }
+
+        .steps {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 7px;
+            min-height: 12px
+        }
+
+        .steps span {
+            width: 6px;
+            height: 6px;
+            border-radius: 10px;
+            background: #efd6df;
+            transition: width .24s, background .24s
+        }
+
+        .steps .active {
+            width: 19px;
+            background: #d74770
+        }
+
+        .last {
+            justify-content: stretch
+        }
+
+        .last .portrait {
+            width: clamp(55px, 11dvh, 90px);
+            border-radius: 17px;
+            margin-bottom: 12px
+        }
+
+        .last .question-copy {
+            display: none
+        }
+
+        .last .actions {
+            flex: 1;
+            min-height: 0;
+            padding: 15px 1px 19px
+        }
+
+        .last .yes {
+            width: 100%;
+            height: 100%;
+            min-height: 44px;
+            border-radius: 25px;
+            font-size: clamp(25px, 7vw, 49px)
+        }
+
+        .final {
+            gap: clamp(9px, 2dvh, 17px)
+        }
+
+        .final .portrait {
+            width: clamp(66px, 21dvh, 166px);
+            margin-bottom: 0
+        }
+
+        .final h1 {
+            font-size: clamp(24px, 6.3vw, 40px)
+        }
+
+        .bedtime {
+            padding: clamp(8px, 2.6dvh, 20px) 13px;
+            border: 1px solid #f4dbe1;
+            border-radius: 20px;
+            background: #fff3f5;
+            color: #4c2734
+        }
+
+        .bedtime strong {
+            font-size: clamp(16px, 4.4vw, 21px);
+            font-weight: 900
+        }
+
+        .bedtime p {
+            font-size: clamp(12px, 3.6vw, 15px);
+            color: var(--muted);
+            margin: 4px 0 0;
+            line-height: 1.4;
+            font-weight: 700
+        }
+
+        .replay {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            align-self: center;
+            min-height: 44px;
+            padding: 0 17px;
+            background: #fffdfb;
+            border: 1px solid #ecd1da;
+            color: #963452;
+            font-size: 13px
+        }
+
+        .replay:hover {
+            background: #fff0f4
+        }
+
+        .replay svg {
+            width: 15px;
+            height: 15px
+        }
+
+        .decor,
+        .hearts {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            color: #ed8da8;
+            overflow: hidden
+        }
+
+        .decor svg {
+            position: absolute;
+            width: var(--size);
+            left: var(--x);
+            top: var(--y);
+            rotate: var(--angle);
+            opacity: var(--alpha)
+        }
+
+        .hearts span {
+            position: absolute;
+            bottom: -36px;
+            left: var(--x);
+            width: var(--size);
+            color: #f5a2b8;
+            opacity: 0;
+            animation: float var(--duration) var(--delay) linear infinite
+        }
+
+        .hearts svg {
+            width: 100%
+        }
+
+        @keyframes float {
+            0% {
+                translate: 0 0;
+                opacity: 0
+            }
+
+            17% {
+                opacity: .6
+            }
+
+            73% {
+                opacity: .38
+            }
+
+            100% {
+                translate: var(--drift) -110dvh;
+                opacity: 0
+            }
+        }
+
+        @media(max-width:460px) {
+            .wrap {
+                gap: 12px
+            }
+
+            .card {
+                border-radius: 26px;
+                padding-inline: 15px
+            }
+
+            .card::before {
+                inset: 6px;
+                border-radius: 20px
+            }
+
+            .stamp {
+                width: 31px;
+                height: 35px;
+                right: 15px;
+                top: 16px
+            }
+
+            .stamp svg {
+                width: 16px;
+                height: 16px
+            }
+
+            .portrait {
+                border-radius: 22px
+            }
+
+            .decor {
+                opacity: .75
+            }
+        }
+
+        @media(max-height:520px) {
+            .wrap {
+                gap: 7px
+            }
+
+            .card {
+                padding-block: 11px
+            }
+
+            .portrait {
+                width: clamp(57px, 22dvh, 104px);
+                margin-bottom: 8px
+            }
+
+            .eyebrow {
+                margin-bottom: 4px
+            }
+
+            .question-copy {
+                margin-top: 4px
+            }
+
+            .actions {
+                min-height: 94px
+            }
+
+            .final {
+                gap: 7px
+            }
+
+            .final .portrait {
+                width: clamp(47px, 16dvh, 86px)
+            }
+
+            .bedtime {
+                padding-block: 6px
+            }
+
+            .last .actions {
+                padding-block: 8px
+            }
+
+            .signoff {
+                display: none
+            }
+        }
+
+        @media(max-height:380px) {
+
+            .stamp,
+            .question-copy,
+            .final .portrait {
+                display: none
+            }
+
+            .actions {
+                min-height: 87px
+            }
+
+            .brand {
+                font-size: 9px
+            }
+
+            .portrait {
+                width: 54px
+            }
+
+            .mood {
+                width: 28px;
+                height: 28px
+            }
+
+            .card h1 {
+                font-size: clamp(20px, 5.3vw, 29px)
+            }
+        }
+
+        @media(prefers-reduced-motion:reduce) {
+
+            *,
+            *::before {
+                animation: none !important;
+                transition: none !important
+            }
+
+            .hearts {
+                display: none
+            }
+
+            .no {
+                translate: none
+            }
+        }
+
+        .mood .emoji,
+        .emoji {
+            display: inline-block;
+            width: 1em;
+            height: 1em;
+            object-fit: contain;
+            vertical-align: -.1em;
+            border-radius: 0
+        }
+
+        .hearts {
+            z-index: 2;
+            color: #f7adc0
+        }
+
+        .hearts span {
+            color: inherit
+        }
+
+        .hearts span:nth-child(3n) {
+            color: #f9cade
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <noscript>Hãy bật JavaScript để mở lá thư này nhé.</noscript>
+    <script type="module">
+        import React, { useState, useRef, useEffect } from 'https://esm.sh/react@19.1.0';
+        import { createRoot } from 'https://esm.sh/react-dom@19.1.0/client?deps=react@19.1.0';
+        const h = React.createElement;
+        const messages = ['Em có yêu anh không?', 'Chắc chưa? Nghĩ lại đi mà 🥺', 'Anh buồn lắm đó nha...', 'Thử lại lần nữa đi, anh đợi mà', 'Nút Không sắp biến mất rồi nè 😢', 'Thôi mà, bấm Có đi em ơi 💕'];
+        const moods = ['🥰', '🥺', '😢', '😭', '🥹'];
+        function emojiText(text) { return text.split(/([🥰🥺😢😭🥹💕💖🌙])/u).map((part, i) => /^[🥰🥺😢😭🥹💕💖🌙]$/u.test(part) ? h('img', { className: 'emoji', key: i, alt: part, src: 'https://cdn.jsdelivr.net/gh/jdecked/twemoji@17.0.2/assets/svg/' + part.codePointAt(0).toString(16) + '.svg' }) : part); }
+        const shifts = [[0, 0], [6, -7], [-4, 8], [7, -12], [-3, 13]];
+        function Icon({ kind = 'heart', solid = false }) { const paths = { heart: 'M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78Z', mail: 'M3 6h18v12H3z M3 7l9 6 9-6', replay: 'M3 12a9 9 0 1 1 2.6 6.4M3 12V5m0 7h7', spark: 'M12 2c0 6-4 10-10 10 6 0 10 4 10 10 0-6 4-10 10-10-6 0-10-4-10-10Z' }; return h('svg', { viewBox: '0 0 24 24', fill: solid ? 'currentColor' : 'none', stroke: 'currentColor', strokeWidth: 1.65, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true }, h('path', { d: paths[kind] })); }
+        function Decorations() { const marks = [['heart', 11, 18, 38, -19, .5], ['spark', 22, 29, 13, 0, .7], ['heart', 83, 18, 24, 21, .6], ['spark', 90, 36, 15, 0, .58], ['heart', 14, 73, 24, -23, .5], ['spark', 6, 60, 13, 0, .8], ['heart', 87, 70, 42, 16, .48], ['spark', 77, 86, 15, 0, .65], ['heart', 28, 88, 13, -12, .7], ['heart', 95, 53, 12, 14, .5]]; return h('div', { className: 'decor', 'aria-hidden': true }, marks.map(([kind, x, y, size, angle, alpha], i) => h('span', { key: i, style: { '--x': x + '%', '--y': y + '%', '--size': size + 'px', '--angle': angle + 'deg', '--alpha': alpha } }, h(Icon, { kind, solid: i % 3 === 0 })))); }
+        function FloatingHearts() { return h('div', { className: 'hearts', 'aria-hidden': true }, Array.from({ length: 13 }, (_, i) => h('span', { key: i, style: { '--x': (5 + i * 7.4) + '%', '--size': (12 + (i * 9) % 19) + 'px', '--delay': (-.5 - i * .69) + 's', '--duration': (7 + (i % 5) * .85) + 's', '--drift': ((i % 2 ? 1 : -1) * (13 + i * 3)) + 'px' } }, h(Icon, { solid: true })))); }
+        function Portrait({ mood }) { return h('div', { className: 'portrait' }, h('img', { src: './kitten.png', alt: 'Mèo trắng ôm một trái tim hồng', width: 1024, height: 1024 }), mood && h('span', { className: 'mood', 'aria-hidden': true }, emojiText(mood))); }
+        function Game() {
+            const [noCount, setNoCount] = useState(0); const [finished, setFinished] = useState(false); const heading = useRef(null); const yesButton = useRef(null); const focusNext = useRef(false); const last = noCount === messages.length - 1; const [x, y] = shifts[noCount] ?? [0, 0]; useEffect(() => { if (!focusNext.current) return; focusNext.current = false; (last && !finished ? yesButton : heading).current?.focus({ preventScroll: true }); }, [finished, last]);
+            const decline = () => { if (noCount === messages.length - 2) focusNext.current = true; setNoCount(count => Math.min(count + 1, messages.length - 1)); };
+            return h('main', { className: 'scene' }, h(Decorations), finished && h(FloatingHearts), h('div', { className: 'wrap' }, h('div', { className: 'brand' }, h(Icon, { kind: 'mail' }), 'Một lá thư tình'), finished ? h('section', { className: 'card final', 'aria-labelledby': 'ending' }, h('div', { className: 'stamp', 'aria-hidden': true }, h(Icon, { solid: true })), h('div', { className: 'intro' }, h(Portrait, { mood: '🥰' })), h('h1', { id: 'ending', ref: heading, tabIndex: -1 }, emojiText('Anh cũng yêu em nhiều lắm 💖')), h('div', { className: 'bedtime' }, h('strong', null, emojiText('Chúc em ngủ ngon nhé 🌙')), h('p', null, 'Mơ thật đẹp, mai anh lại nhắn em đầu tiên.')), h('button', { className: 'replay', type: 'button', onClick: () => { focusNext.current = true; setNoCount(0); setFinished(false); } }, h(Icon, { kind: 'replay' }), 'Chơi lại')) : h('section', { className: 'card' + (last ? ' last' : ''), 'aria-labelledby': 'question' }, h('div', { className: 'stamp', 'aria-hidden': true }, h(Icon)), h('div', { className: 'intro' }, h(Portrait, { mood: moods[Math.min(noCount, 4)] }), h('p', { className: 'eyebrow' }, 'Một câu hỏi nhỏ'), h('h1', { id: 'question', ref: heading, tabIndex: -1, 'aria-live': 'polite' }, emojiText(messages[noCount])), h('p', { className: 'question-copy' }, 'Chọn câu trả lời của em nhé!')), h('div', { className: 'actions' }, h('button', { type: 'button', className: 'yes', ref: yesButton, style: { '--grow': 1 + noCount * .25 }, onClick: () => { focusNext.current = true; setFinished(true); } }, h(Icon, { solid: true }), last ? 'Có chứ!' : 'Có'), !last && h('button', { type: 'button', className: 'no', style: { '--shrink': 1 - noCount * .1, '--shift-x': x + 'px', '--shift-y': y + 'px' }, onClick: decline }, 'Không')), h('div', { className: 'steps', 'aria-hidden': true }, messages.map((_, i) => h('span', { key: i, className: i === noCount ? 'active' : undefined })))), h('div', { className: 'signoff' }, h(Icon, { solid: true }), 'Gửi riêng cho em')));
+        }
+        createRoot(document.getElementById('root')).render(h(Game));
+    </script>
+</body>
+
+</html>
